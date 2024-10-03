@@ -1,0 +1,12 @@
+html {
+  box-sizing: border-box;
+}
+
+body {
+  background-image: linear-gradient(
+    to top right,
+    rgb(0, 7, 206),
+    rgba(212, 71, 0, 0.363)
+  );
+  color: #333;
+}

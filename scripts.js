@@ -8,10 +8,11 @@ document.querySelector(".btn-hold").addEventListener("click", holdScore);
 document.querySelector(".btn-new").addEventListener("click", resetGame);
 document.querySelector(".btn-roll").addEventListener("click", function () {
   setTimeout(() => {
-    const diceRollScore = Math.round(Math.random() * 5 + 1);
+    const diceRollScore = Math.trunc(Math.random() * 6 + 1);
     if (diceRollScore !== 1) {
       setGameAfterRoll(diceRollScore);
     } else {
+      document.querySelector(".dice").src = `resources/dice-1.png`;
       resetCurrentScoreAndSwitchPlayer();
     }
     co;

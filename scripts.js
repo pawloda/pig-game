@@ -6,16 +6,15 @@ let totalScores;
 
 document.querySelector(".btn-hold").addEventListener("click", holdScore);
 document.querySelector(".btn-new").addEventListener("click", resetGame);
-document.querySelector(".btn-roll").addEventListener("click", function () {
+document.querySelector(".btn-roll").addEventListener("mouseup", function () {
   setTimeout(() => {
     const diceRollScore = Math.trunc(Math.random() * 6 + 1);
     if (diceRollScore !== 1) {
       setGameAfterRoll(diceRollScore);
     } else {
-      document.querySelector(".dice").src = `resources/dice-1.png`;
+      document.querySelector(".dice").src = `img/dice-1.png`;
       resetCurrentScoreAndSwitchPlayer();
     }
-    co;
   }, 100);
 });
 
@@ -33,7 +32,7 @@ function holdScore() {
 }
 
 function resetGame() {
-  document.querySelector(".dice").src = "resources/dice-1.png";
+  document.querySelector(".dice").src = "img/dice-1.png";
   document
     .querySelectorAll(".player")
     .forEach((el) => el.classList.remove("player-active"));
@@ -46,7 +45,7 @@ function resetGame() {
 }
 
 function setGameAfterRoll(diceRollScore) {
-  document.querySelector(".dice").src = `resources/dice-${diceRollScore}.png`;
+  document.querySelector(".dice").src = `img/dice-${diceRollScore}.png`;
   currentScores[activePlayer - 1] += diceRollScore;
   document.querySelector(`#current-score-${activePlayer}`).textContent =
     currentScores[activePlayer - 1];

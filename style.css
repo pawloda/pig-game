@@ -1,18 +1,15 @@
 * {
   font-family: monospace;
   font-size: large;
-  font-weight: bolder;
-  text-transform: uppercase;
-}
-
-body,
-html,
-main {
-  box-sizing: border-box;
-  height: 100%;
   margin: 0;
   padding: 0;
-  width: 100%;
+  text-transform: uppercase;
+  box-sizing: border-box;
+}
+
+html,
+main {
+  height: 100%;
 }
 
 body {
@@ -24,20 +21,24 @@ body {
   color: #333;
 }
 
+h2 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
 img {
   display: none;
-  float: center;
-  left: 45%;
-  position: absolute;
-  top: 45%;
-  width: 10%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10vh;
+  width: 180px;
 }
 
 section {
   background-color: rgba(255, 133, 45, 0.452);
   border: 1px solid;
   border-color: #333;
-  border-radius: 20px;
+  border-radius: 30px;
   border-width: 3px;
   margin: 50px;
   text-align: center;
@@ -48,26 +49,38 @@ section {
   background-color: rgba(255, 133, 45, 0.452);
   border: 1px solid;
   border-color: #333;
-  border-radius: 10px;
+  border-radius: 15px;
   border-width: 2px;
-  float: center;
   height: 50px;
-  left: 45%;
-  position: absolute;
-  width: 10%;
+  margin-left: auto;
+  margin-right: auto;
+  width: 180px;
+}
+
+.btn:hover {
+  background-color: rgba(255, 132, 45, 0.781);
+  border: 2px solid;
+  font-weight: bold;
+}
+
+.btn:active {
+  background-color: rgb(255, 85, 0);
+  border: 3px solid;
+  font-weight: bolder;
 }
 
 .btn-hold {
-  bottom: 10%;
+  margin-top: 5vh;
   display: none;
 }
 
 .btn-new {
-  top: 10%;
+  margin-top: 5vh;
+  display: block;
 }
 
 .btn-roll {
-  bottom: 20%;
+  margin-top: 20vh;
   display: none;
 }
 

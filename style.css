@@ -19,6 +19,7 @@ body {
     rgba(212, 71, 0, 0.363)
   );
   color: #333;
+  position: relative;
 }
 
 h2 {

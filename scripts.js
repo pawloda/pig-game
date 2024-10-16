@@ -7,6 +7,8 @@ let totalScores;
 document.querySelector(".btn-hold").addEventListener("click", holdScore);
 document.querySelector(".btn-new").addEventListener("click", resetGame);
 document.querySelector(".btn-roll").addEventListener("mouseup", function () {
+  document.querySelector(".btn-roll").style.display = "none";
+  document.querySelector(".btn-hold").style.display = "none";
   setTimeout(() => {
     const diceRollScore = Math.trunc(Math.random() * 6 + 1);
     if (diceRollScore !== 1) {
@@ -15,6 +17,7 @@ document.querySelector(".btn-roll").addEventListener("mouseup", function () {
       document.querySelector(".dice").src = `img/dice-1.png`;
       resetCurrentScoreAndSwitchPlayer();
     }
+    document.querySelector(".btn-roll").style.display = "block";
   }, 100);
 });
 

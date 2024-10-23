@@ -1,77 +1,76 @@
 "use strict";
 
+const btnHold = document.querySelector(".btn-hold");
+const btnRoll = document.querySelector(".btn-roll");
+const dice = document.querySelector(".dice");
+const players = document.querySelectorAll(".player");
+
 let activePlayer;
-let currentScores;
+let currentScore;
 let totalScores;
 
-document.querySelector(".btn-hold").addEventListener("click", holdScore);
+btnHold.addEventListener("click", holdScore);
 document.querySelector(".btn-new").addEventListener("click", resetGame);
-document.querySelector(".btn-roll").addEventListener("mouseup", function () {
-  document.querySelector(".btn-roll").style.display = "none";
-  document.querySelector(".btn-hold").style.display = "none";
+btnRoll.addEventListener("mouseup", function () {
+  hideElements(btnHold, btnRoll);
   setTimeout(() => {
     const diceRollScore = Math.trunc(Math.random() * 6 + 1);
     if (diceRollScore !== 1) {
       setGameAfterRoll(diceRollScore);
     } else {
-      document.querySelector(".dice").src = `img/dice-1.png`;
+      dice.src = `img/dice-1.png`;
       resetCurrentScoreAndSwitchPlayer();
+      alert(`Player ${activePlayer} rolled 1! 🤕`);
     }
-    document.querySelector(".btn-roll").style.display = "block";
+    displayElements(btnRoll);
   }, 100);
 });
 
 function holdScore() {
   const position = activePlayer - 1;
-  totalScores[position] = totalScores[position] + currentScores[position];
+  totalScores[position] = totalScores[position] + currentScore;
   document.querySelector(`#total-score-${activePlayer}`).textContent =
     totalScores[position];
   if (totalScores[position] >= 100) {
     finishGame();
   } else {
     resetCurrentScoreAndSwitchPlayer();
-    document.querySelector(".btn-hold").style.display = "none";
+    hideElements(btnHold);
   }
 }
 
 function resetGame() {
-  document.querySelector(".dice").src = "img/dice-1.png";
-  document
-    .querySelectorAll(".player")
-    .forEach((el) => el.classList.remove("player-active"));
+  dice.src = "img/dice-1.png";
+  players.forEach((el) => el.classList.remove("player-active"));
   setActivePlayer(Math.round(Math.random() + 1));
-  document
-    .querySelectorAll(".dice, .btn-roll")
-    .forEach((el) => (el.style.display = "block"));
+  displayElements(dice, btnRoll);
   setScoresToZero();
-  document.querySelector(".btn-hold").style.display = "none";
+  hideElements(btnHold);
 }
 
 function setGameAfterRoll(diceRollScore) {
-  document.querySelector(".dice").src = `img/dice-${diceRollScore}.png`;
-  currentScores[activePlayer - 1] += diceRollScore;
-  document.querySelector(`#current-score-${activePlayer}`).textContent =
-    currentScores[activePlayer - 1];
-  document.querySelector(".btn-hold").style.display = "block";
+  dice.src = `img/dice-${diceRollScore}.png`;
+  currentScore += diceRollScore;
+  setCurrentScore(currentScore);
+  displayElements(btnHold);
 }
 
 function resetCurrentScoreAndSwitchPlayer() {
-  currentScores[activePlayer - 1] = 0;
-  document.querySelector(`#current-score-${activePlayer}`).textContent = 0;
+  currentScore = 0;
+  setCurrentScore(0);
   activePlayer = getNextPlayerNumber();
   setActivePlayer(activePlayer);
-  document.querySelector(".btn-hold").style.display = "none";
+  hideElements(btnHold);
 }
 
 function finishGame() {
-  document.querySelector(".btn-hold").style.display = "none";
-  document.querySelector(".btn-roll").style.display = "none";
-  document.querySelector(`#current-score-${activePlayer}`).textContent = 0;
-  alert(`Player ${activePlayer} won the game!!!`);
+  hideElements(btnHold, btnRoll);
+  setCurrentScore(0);
+  alert(`Player ${activePlayer} won the game!!! 😁`);
 }
 
 function setScoresToZero() {
-  currentScores = [0, 0];
+  currentScore = 0;
   totalScores = [0, 0];
   document
     .querySelectorAll(".current-score, .total-score")
@@ -87,14 +86,24 @@ function setActivePlayer(number) {
   document.querySelector(
     `#name-${inactivePlayer}`
   ).textContent = `Player ${inactivePlayer}`;
-  document
-    .querySelectorAll(".player")
-    .forEach((el) => el.classList.remove("player-active"));
+  players.forEach((el) => el.classList.remove("player-active"));
   document
     .querySelector(`.player-${activePlayer}`)
     .classList.add("player-active");
 }
 
+function hideElements(...elements) {
+  elements.forEach((el) => (el.style.display = "none"));
+}
+
+function displayElements(...elements) {
+  elements.forEach((el) => (el.style.display = "block"));
+}
+
 function getNextPlayerNumber() {
   return activePlayer === 1 ? 2 : 1;
+}
+
+function setCurrentScore(score) {
+  document.querySelector(`#current-score-${activePlayer}`).textContent = score;
 }
